@@ -19,7 +19,11 @@ int main()
 	{
 		"levels/level1.txt",
 		"levels/level2.txt",
-		"levels/level3.txt"
+		"levels/level3.txt",
+		"levels/level4.txt",
+		"levels/level5.txt",
+		"levels/level6.txt",
+		"levels/level7.txt"
 	};
 
 	int currentLevel = 0;
