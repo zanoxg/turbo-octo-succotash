@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <conio.h>
-#include <synchapi.h>
+#include <windows.h>
 
 void Level::showPrologue(const std::string& filename)
 {
@@ -17,7 +17,7 @@ void Level::showPrologue(const std::string& filename)
 	file.close();
 
 	std::cout << std::endl << "нажмите любую кнопку для продолжения...";
-	_getch();
+	(void)_getch();
 
 }
 
@@ -88,12 +88,19 @@ void Level::drawWithPlayer(int playerX, int playerY) const
 
 char Level::getTile(int x, int y) const
 {
+	if (x < 0 || x >= width || y < 0 || y >= height) 
+	{
+		return '#'; 
+	}
 	return map[y][x];
 }
 
 void Level::setTile(int x, int y, char tile)
 {
-	map[y][x] = tile;
+	if (x >= 0 && x < width && y >= 0 && y < height) 
+	{
+		map[y][x] = tile;
+	}
 }
 
 int Level::getWidth() const

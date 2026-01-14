@@ -10,8 +10,6 @@ void drawPlayerInfo(int& playerHP, int& maxHP)
 
 int main()
 {
-	SetConsoleCP(65001);
-	SetConsoleOutputCP(65001);
 
 	int playerHP = 10;
 	int maxHP = 10;
@@ -142,37 +140,37 @@ int main()
 			level.loadFromFile(levels[currentLevel]);
 			playerX = level.playerStartX;
 			playerY = level.playerStartY;
+			continue;
 		}
 
-		if (tile == '^')
+		else if (tile == '^')
 		{
 			--playerHP;
-		}
-
-		if (playerHP <= 0)
-		{
-			system("cls");
-			std::cout << "ты умер..." << std::endl;
-			_getch();
-			break;
+			level.setTile(playerX, playerY, '.');
 		}
 		
-		if (tile == 'E')
+		else if (tile == 'E')
 		{
 			playerHP -= 2;
 		}
 
-		if (tile == '+')
+		else if (tile == '+')
 		{
 			playerHP += 3;
-			if (playerHP > maxHP)
+			if (playerHP >= maxHP)
 			{
 				playerHP = maxHP;
-				level.setTile(playerX, playerY, '.');
 			}
+			level.setTile(playerX, playerY, '.');
 		}
 
-		
+		else if (playerHP <= 0)
+		{
+			system("cls");
+			std::cout << "ты умер..." << std::endl;
+			(void)_getch();
+			break;
+		}
 	}
 
 
